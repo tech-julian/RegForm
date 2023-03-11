@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="text-align: center; color: rgb(226, 166, 226);">Registration Form</h1>
+    <div class="container" style="background-color: rgb(250, 248, 252);">
+        <form id="form" action="/" style="width: 300px; margin: 20vh auto 0 auto; border-radius: 4px; padding: 20px;">
+            <fieldset>
+                <!-- <legend><strong>BioData</strong></legend> -->
+            <div class="input-control">
+                <label for="fullname">Full Name</label><br/>
+                <input type="text" name="name" id="fullname" />
+                <div class="error"></div>
+            </div>
+
+            <div>
+                <label for="email" class="error">Email</label><br/>
+                <input type="email" name="email" id="email"/>
+                <div class="error"></div>
+            </div>
+
+            <div>
+                <label for="phoneno">Phone Number</label><br/>
+                <input type="number" name="number" id="phoneno"/>
+                <div class="error"></div>
+            </div>
+
+            <div>
+                <label for="Sex">Gender:&nbsp;&nbsp;</label>
+                <label for="Male">Male</label>
+                <input type="radio" name="Male" id="Male"/>
+                <label for="Female">Female</label>
+                <input type="radio" name="Female" id="Female"/>
+            </div>
+
+            <div>
+                <label for="password">Password</label><br/>
+                <input type="password" name="password" id="password"/> 
+                <div class="error"></div>
+            </div>    
+                
+            <button type="submit" class="btn">SUBMIT</button>
+            </fieldset>
+        </form>
+    </div>
+    <Script>  
+    alert("Fill in your correct details!")
+
+        const form = document.getElementById('form');
+        const fullname = document.getElementById('fullname');
+        const email = document.getElementById('email');
+        const phoneno = document.getElementById('phoneno');
+        const password = document.getElementById('password');
+    
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            validateInputs();
+        });
+
+        const setError =(element , message) =>{
+            const inputControl = element.parentElement;
+            const errorDisplay = inputControl.querySelector('.error');
+
+            errorDisplay.innerText = message;
+            inputControl.classList.add('error');
+            inputControl.classList.remove('success');
+        }
+
+        const setSuccess = element =>{
+            const inputControl = element.parentElement;
+            const errorDisplay = inputControl.querySelector('.error');
+
+            errorDisplay.innerText = '';
+            inputControl.classList.add('succes');
+        };
+
+        const isValidEmail =email => {
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+        const validateInputs = () =>{
+            const emailValue = email.value.trim();
+            
+            if(emailValue === ''){
+                setError(email, 'Email is required')
+            } else if(!isValidEmail(emailValue)){
+                setError(email, 'Provide a valid email address');
+            }else{
+                setSuccess(email);
+            }
+        };
+
+       var submit =document.getElementById('submit').value
+       console.log('Successfully Submitted')
+    </Script>
+</body>
+</html>
